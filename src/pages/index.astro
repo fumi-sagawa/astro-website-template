@@ -1,0 +1,27 @@
+---
+import Layout from '@/components/parts/Layout.astro'
+import Hero from '@/components/pages/Top/Hero.astro'
+import CardList from '@/components/pages/Top/CardList/CardList.astro'
+---
+
+<Layout title="Astro Web Startar" description="サイトの概要">
+  <main>
+    <Hero />
+    <CardList />
+  </main>
+</Layout>
+
+<style lang="scss">
+  // @use 'src/styles/' as *;
+  @use 'src/styles/functions' as *;
+  @use 'src/styles/variables' as *;
+
+  main {
+    margin: auto;
+    padding: 1em;
+    max-width: 60ch;
+    @include mq(md) {
+      margin: 10px;
+    }
+  }
+</style>

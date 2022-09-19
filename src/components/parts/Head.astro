@@ -1,0 +1,56 @@
+---
+import { siteInfo } from '@/data/siteInfo'
+
+export interface Props {
+  title: string
+  description: string
+}
+
+const { title = siteInfo.title, description = siteInfo.description } =
+  Astro.props
+---
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content={siteInfo.viewport} />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+
+  <!-- アイコン -->
+  <link rel="shortcut icon" href="/favicon.ico" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+  <!-- facebookのOGP -->
+  <meta property="og:url" content={siteInfo.url} />
+  <meta property="og:title" content={title} />
+  <meta property="og:type" content="website" />
+  <meta property="og:description" content={description} />
+  <meta property="og:image" content={siteInfo.url + siteInfo.ogpImagePath} />
+  <meta property="og:site_name" content={title} />
+  {siteInfo.fbAppId && <meta property="fb:app_id" content={siteInfo.fbAppId} />}
+  <meta property="og:locale" content={siteInfo.locale} />
+
+  <!-- TwitterのOGP -->
+  <meta name="twitter:card" content={siteInfo.twitterCardType} />
+  {
+    siteInfo.twitterId && (
+      <meta name="twitter:site" content={siteInfo.twitterId} />
+    )
+  }
+  <meta name="twitter:description" content={description} />
+  <meta
+    name="twitter:image:src"
+    content={siteInfo.url + siteInfo.ogpImagePath}
+  />
+
+  <!-- クローラーを制御する場合 -->
+  <meta name="robots" content="index,follow" />
+
+  <!-- URLを正規化する場合 -->
+  {
+    siteInfo.canonicalUrl && (
+      <link rel="canonical" href={siteInfo.canonicalUrl} />
+    )
+  }
+</head>
